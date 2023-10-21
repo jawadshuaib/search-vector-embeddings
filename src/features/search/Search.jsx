@@ -9,7 +9,7 @@ export default function Search() {
     // Define an async function inside useEffect
     const fetchData = async () => {
       try {
-        const resp = await getVector('leather case');
+        const resp = await getVector('iPhone 15 tempered glass');
         setEmbedding(resp.embedding);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -20,13 +20,13 @@ export default function Search() {
     fetchData();
   }, [setEmbedding]);
 
+  // We can perform search once we have the embedding for the query
   useEffect(() => {
     if (embedding.length > 0) {
       console.log('Starting search');
       findSimilarProducts(embedding).then((res) => console.log(res));
     }
   }, [embedding]);
-  // getVector('Hello World').then((res) => console.log(res.embedding));
 
   return (
     <div className="flex justify-between overflow-hidden rounded-md bg-white shadow shadow-black/20 dark:bg-gray-600">
