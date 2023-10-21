@@ -15,6 +15,7 @@ export async function handler(event) {
   //   'Content-Type': 'application/json',
   //   Authorization: `Bearer ${token}`,
   // };
+  console.log(event);
 
   return {
     statusCode: 200,
