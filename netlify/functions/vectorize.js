@@ -1,4 +1,5 @@
 /* eslint-env node */
+// https://search-vector-embeddings.netlify.app/.netlify/functions/vectorize
 export async function handler(event) {
   if (event.httpMethod !== 'POST')
     return { statusCode: 405, body: 'Method Not Allowed' };
