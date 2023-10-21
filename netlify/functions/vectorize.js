@@ -1,13 +1,22 @@
 /* eslint-env node */
 
 export async function handler(event) {
-  // if (event.httpMethod !== 'POST')
-  //   return { statusCode: 405, body: 'Method Not Allowed' };
+  if (event.httpMethod !== 'POST')
+    return { statusCode: 405, body: 'Method Not Allowed' };
 
-  // const token = process.env.OPENAI_API_KEY;
-  // const { model, payload, temperature } = JSON.parse(event.body);
+  const token = process.env.OPENAI_API_KEY;
+  const { model, input } = JSON.parse(event.body);
 
-  // const { context, input } = payload;
+  const response = await fetch('https://api.openai.com/v1/embeddings', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    method: 'POST',
+    body: JSON.stringify({ input, model }),
+  });
+
+  const { data } = await response.json();
 
   // let headers = {};
 
@@ -19,6 +28,6 @@ export async function handler(event) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: 'Hello from Search' }),
+    body: { embedding: data[0].embedding },
   };
 }
