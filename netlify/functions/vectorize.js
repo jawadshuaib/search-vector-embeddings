@@ -16,8 +16,6 @@ export async function handler(event) {
       body: JSON.stringify({ input, model }),
     });
 
-    console.log(input, model);
-
     const { data } = await response.json();
 
     return {
