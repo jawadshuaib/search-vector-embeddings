@@ -1,10 +1,10 @@
 import React from 'react';
-import Search from '../search/Search';
+import SearchBar from '../search/SearchBar';
 
 export default function Form() {
   return (
     <form>
-      <Search />
+      <SearchBar />
     </form>
   );
 }
