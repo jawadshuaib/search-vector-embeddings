@@ -1,6 +1,9 @@
 import React from 'react';
+import getVector from '../../services/getVector';
 
 export default function Search() {
+  getVector('Hello World').then((res) => console.log(res));
+
   return (
     <div className="flex justify-between overflow-hidden rounded-md bg-white shadow shadow-black/20 dark:bg-gray-600">
       <input
