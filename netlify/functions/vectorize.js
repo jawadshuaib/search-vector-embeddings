@@ -28,6 +28,6 @@ export async function handler(event) {
 
   return {
     statusCode: 200,
-    body: { embedding: data[0].embedding },
+    body: JSON.stringify({ embedding: data[0].embedding }),
   };
 }
