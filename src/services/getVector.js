@@ -3,7 +3,7 @@ import { siteInfo } from '../utils/settings';
 export default async function getVector(input) {
   const model = 'text-embedding-ada-002';
   try {
-    const response = await fetch(`${siteInfo.fnPath}/test`, {
+    const response = await fetch(`${siteInfo.fnPath}/vectorize`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

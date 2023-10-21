@@ -17,11 +17,17 @@ export async function handler(event) {
       body: JSON.stringify({ input, model }),
     });
 
-    const { data } = await response.json();
+    const { data, error } = await response.json();
+
+    if (data && data.length > 0)
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ embedding: data[0].embedding }),
+      };
 
     return {
-      statusCode: 200,
-      body: JSON.stringify({ embedding: data[0].embedding }),
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
     };
   } catch (error) {
     return {

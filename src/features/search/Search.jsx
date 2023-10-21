@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import getVector from '../../services/getVector';
+import { findSimilarProducts } from '../../services/searchProducts';
 
 export default function Search() {
-  getVector('Hello World').then((res) => console.log(res));
+  const [embedding, setEmbedding] = useState([]);
+
+  useEffect(() => {
+    // Define an async function inside useEffect
+    const fetchData = async () => {
+      try {
+        const resp = await getVector('leather case');
+        setEmbedding(resp.embedding);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the async function
+    fetchData();
+  }, [setEmbedding]);
+
+  useEffect(() => {
+    if (embedding.length > 0) {
+      console.log('Starting search');
+      findSimilarProducts(embedding).then((res) => console.log(res));
+    }
+  }, [embedding]);
+  // getVector('Hello World').then((res) => console.log(res.embedding));
 
   return (
     <div className="flex justify-between overflow-hidden rounded-md bg-white shadow shadow-black/20 dark:bg-gray-600">
