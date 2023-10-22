@@ -4,7 +4,7 @@ import { findProductsUsingVectors } from '../../services/searchProducts';
 import Input from '../../ui/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResults, setSampleQuery, setSearch } from './searchSlice';
-// import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function Search() {
   const [embedding, setEmbedding] = useState([]);
@@ -12,33 +12,43 @@ export default function Search() {
   const { sampleQuery } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
-  // We can perform search once we have the embedding for the query
+  // React Query
+  const {
+    data: results,
+    refetch,
+    isRefetching,
+  } = useQuery({
+    queryKey: ['search'],
+    queryFn: () => findProductsUsingVectors(embedding),
+    refetchOnWindowFocus: false,
+    enabled: false, //disable the query:
+    //this is how we keep it from running on component mount.
+  });
+
   useEffect(() => {
-    if (embedding.length > 0) {
-      (async () => {
-        try {
-          const resp = await findProductsUsingVectors(embedding);
-          // Store results in redux slice
-          dispatch(setResults(resp));
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      })();
-    }
+    //
+    // Here we perform some action based on the returned data from React Query
+    //
+    // Store results in redux slice
+    dispatch(setResults(results));
+  }, [results, isRefetching]);
+
+  useEffect(() => {
+    //
+    // React Query does not run on load, so we need to manually trigger it when
+    // there is a change in state
+    //
+    refetch();
   }, [embedding]);
 
   useEffect(() => {
+    //
+    // Execute the search when the sample query is clicked
+    //
     if (sampleQuery === null) return;
 
     handleChange(sampleQuery, 0);
   }, [sampleQuery]);
-  // function handleSearch() {
-  //   const x = useQuery({
-  //     queryKey: ['search'],
-  //     queryFn: () => findSimilarProducts(embedding),
-  //   });
-  //   console.log(x);
-  // }
 
   const handleChange = (query, debouncer = 300) => {
     // Clear the previous timer (if any)

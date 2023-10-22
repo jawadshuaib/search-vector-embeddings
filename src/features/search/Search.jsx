@@ -7,7 +7,7 @@ import { setSampleQuery } from './searchSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Search() {
-  const sampleQuery = 'Wireless headphones';
+  const sampleQuery = 'Connector for TV';
   const { results } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
@@ -18,6 +18,7 @@ export default function Search() {
   return (
     <>
       <H1 customClass="mb-5">Search Vector</H1>
+      {/* 
       <Paragraph>Toggle to compare results with SQL.</Paragraph>
       <Paragraph>
         <div className="grid gap-1 md:grid-cols-2">
@@ -53,7 +54,7 @@ export default function Search() {
             </label>
           </div>
         </div>
-      </Paragraph>
+      </Paragraph> */}
 
       <Paragraph customClass="hidden sm:flex">
         This project demonstrates that vectorized search yields qualitatively
