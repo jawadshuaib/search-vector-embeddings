@@ -30,7 +30,7 @@ export default function Search() {
     // Here we perform some action based on the returned data from React Query
     //
     // Store results in redux slice
-    dispatch(setResults(results));
+    if (results) dispatch(setResults(results));
   }, [results, isRefetching]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Search() {
     // React Query does not run on load, so we need to manually trigger it when
     // there is a change in state
     //
-    refetch();
+    if (embedding.length > 0) refetch();
   }, [embedding]);
 
   useEffect(() => {
