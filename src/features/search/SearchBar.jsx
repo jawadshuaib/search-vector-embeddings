@@ -3,7 +3,7 @@ import getVector from '../../services/getVector';
 import { findProductsUsingVectors } from '../../services/searchProducts';
 import Input from '../../ui/Input';
 import { useDispatch, useSelector } from 'react-redux';
-import { setResults, setSearch } from './searchSlice';
+import { setResults, setSampleQuery, setSearch } from './searchSlice';
 // import { useQuery } from '@tanstack/react-query';
 
 export default function Search() {
@@ -43,6 +43,9 @@ export default function Search() {
   const handleChange = (query, debouncer = 300) => {
     // Clear the previous timer (if any)
     if (timer) clearTimeout(timer);
+
+    // Reset sample query if user is typing
+    if (query !== sampleQuery) dispatch(setSampleQuery(null));
 
     if (query.length < 3) {
       dispatch(setResults([]));
