@@ -1,5 +1,7 @@
 # Search Vector Embeddings
 
+Live app: https://search-vector-embeddings.netlify.app/
+
 This project demonstrates that vectorized search yields qualitatively better results than traditional SQL queries. SQL uses exact string comparisons while vector based search uses dimensional similarity between strings. The later method offers greater flexibility as it performs well even in absence of exact word matches.
 
 ## Try it out
