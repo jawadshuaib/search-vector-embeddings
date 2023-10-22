@@ -29,10 +29,9 @@ export default function Search() {
       <Paragraph>
         This project demonstrates that vectorized search yields qualitatively
         better results than traditional SQL queries. SQL uses exact string
-        comparisons to find relevant results. While, vector based search
-        achieves the same using dimensional similarity between strings. The
-        later technique is more flexible as it does not rely on exact word
-        matchings.
+        comparisons while vector based search uses dimensional similarity
+        between strings. The later method offers greater flexibility as it
+        performs well even in absence of exact word matches.
       </Paragraph>
       <Paragraph>Toggle to compare results with SQL.</Paragraph>
       <Form />
