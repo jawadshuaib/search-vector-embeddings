@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import getVector from '../../services/getVector';
 import { findProductsUsingVectors } from '../../services/searchProducts';
 import Input from '../../ui/Input';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setResults, setSearch } from './searchSlice';
 // import { useQuery } from '@tanstack/react-query';
 
 export default function Search() {
   const [embedding, setEmbedding] = useState([]);
   const [timer, setTimer] = useState(null);
+  const { sampleQuery } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
   // We can perform search once we have the embedding for the query
@@ -26,6 +27,11 @@ export default function Search() {
     }
   }, [embedding]);
 
+  useEffect(() => {
+    if (sampleQuery === null) return;
+
+    handleChange(sampleQuery, 0);
+  }, [sampleQuery]);
   // function handleSearch() {
   //   const x = useQuery({
   //     queryKey: ['search'],
@@ -34,7 +40,7 @@ export default function Search() {
   //   console.log(x);
   // }
 
-  const handleChange = (query) => {
+  const handleChange = (query, debouncer = 300) => {
     // Clear the previous timer (if any)
     if (timer) clearTimeout(timer);
 
@@ -60,11 +66,16 @@ export default function Search() {
           console.error('Error fetching data:', error);
         }
       })();
-    }, 300);
+    }, debouncer);
 
     setTimer(newTimer);
   };
   return (
-    <Input type="text" placeholder="Start Typing..." onChange={handleChange} />
+    <Input
+      type="text"
+      value={sampleQuery || ''}
+      placeholder="Start Typing..."
+      onChange={handleChange}
+    />
   );
 }

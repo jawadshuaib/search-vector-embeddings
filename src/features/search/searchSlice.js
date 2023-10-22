@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  sampleQuery: null,
   query: null,
   embedding: [],
   results: [],
@@ -14,10 +15,13 @@ const searchReducer = createSlice({
       state.query = query;
       state.embedding = embedding;
     },
+    setSampleQuery(state, action) {
+      state.sampleQuery = action.payload;
+    },
     setResults(state, action) {
       state.results = action.payload;
     },
   },
 });
 export default searchReducer.reducer;
-export const { setSearch, setResults } = searchReducer.actions;
+export const { setSearch, setSampleQuery, setResults } = searchReducer.actions;
