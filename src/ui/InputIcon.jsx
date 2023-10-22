@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function InputIcon() {
   return (
-    <span className="m-1 inline-flex ites-center rounded-md bg-green-600 px-2 py-2  dark:bg-slate-800 ">
+    <span className="m-1 inline-flex ites-center rounded-md bg-slate-200 px-2 py-2  dark:bg-slate-800 ">
       <svg
-        className="text-slate-300"
+        className="text-slate-400 dark:text-slate-300"
         width="32"
         height="32"
         viewBox="0 0 24 24"

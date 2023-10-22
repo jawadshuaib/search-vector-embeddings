@@ -24,7 +24,7 @@ export default function Input({
       <input
         type={type}
         value={inputValue}
-        className={`${customClass} block w-full flex-1 py-2 px-3 text-slate-100 focus:outline-none dark:bg-gray-600`}
+        className={`${customClass} block w-full flex-1 font-medium text-lg py-2 px-3 text-slate-800 focus:outline-none dark:text-slate-100 dark:bg-gray-600`}
         placeholder={`${placeholder}`}
         onChange={(e) => handleChange(e)}
       />
