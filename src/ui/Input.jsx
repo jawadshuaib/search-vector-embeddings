@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputBtn from './InputBtn';
+import InputIcon from './InputIcon';
 
 export default function Input({ type, placeholder, customClass, onChange }) {
   function handleChange(e) {
@@ -14,7 +14,7 @@ export default function Input({ type, placeholder, customClass, onChange }) {
         placeholder={`${placeholder}`}
         onChange={(e) => handleChange(e)}
       />
-      <InputBtn />
+      <InputIcon />
     </div>
   );
 }

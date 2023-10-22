@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function InputBtn() {
+export default function InputIcon() {
   return (
-    <span className="m-1 inline-flex cursor-pointer ites-center rounded-md bg-green-600 px-2 py-2 hover:bg-green-700 dark:bg-slate-800 dark:hover:bg-gray-700">
+    <span className="m-1 inline-flex ites-center rounded-md bg-green-600 px-2 py-2  dark:bg-slate-800 ">
       <svg
         className="text-slate-300"
         width="32"

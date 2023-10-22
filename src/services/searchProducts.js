@@ -26,7 +26,7 @@ async function fetchData(action, method = 'GET', body = null) {
   }
 }
 
-export async function findSimilarProducts(embedding) {
-  const action = 'similarProducts';
+export async function findProductsUsingVectors(embedding) {
+  const action = 'vectorSearch';
   return await fetchData(action, 'POST', { embedding });
 }

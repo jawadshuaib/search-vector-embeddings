@@ -11,7 +11,7 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-async function findSimilarProducts(embedding) {
+async function findProductsUsingVectors(embedding) {
   const { data, error } = await supabase.rpc('match_products', {
     query_embedding: embedding,
     match_threshold: 0.7,
@@ -28,9 +28,9 @@ export async function handler(event) {
     let result;
     let body;
     switch (action) {
-      case 'similarProducts':
+      case 'vectorSearch':
         body = JSON.parse(event.body); // Parse the request body to get the embedding data
-        result = await findSimilarProducts(body.embedding);
+        result = await findProductsUsingVectors(body.embedding);
         if (result.error) throw result.error;
         break;
       default:

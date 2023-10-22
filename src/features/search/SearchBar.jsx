@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getVector from '../../services/getVector';
-import { findSimilarProducts } from '../../services/searchProducts';
+import { findProductsUsingVectors } from '../../services/searchProducts';
 import Input from '../../ui/Input';
 import { useDispatch } from 'react-redux';
 import { setResults, setSearch } from './searchSlice';
@@ -16,7 +16,7 @@ export default function Search() {
     if (embedding.length > 0) {
       (async () => {
         try {
-          const resp = await findSimilarProducts(embedding);
+          const resp = await findProductsUsingVectors(embedding);
           // Store results in redux slice
           dispatch(setResults(resp));
         } catch (error) {
@@ -60,7 +60,7 @@ export default function Search() {
           console.error('Error fetching data:', error);
         }
       })();
-    }, 500);
+    }, 300);
 
     setTimer(newTimer);
   };
