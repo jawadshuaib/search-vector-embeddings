@@ -5,12 +5,12 @@ import Href from './Href';
 
 export default function AppLayout({ children }) {
   return (
-    <div className="App flex min-h-screen justify-center dark:bg-slate-800">
-      <div className="relative h-screen">
-        <div className="absolute w-128 max-w-lg top-8 md:top-1/4 left-1/2 transform -translate-x-1/2">
+    <div className="App flex flex-col min-h-screen justify-center dark:bg-slate-800">
+      <main className="flex-grow">
+        <div className="absolute w-80 md:w-96 lg:w-128 max-w-lg top-8 md:top-1/4 left-1/2 transform -translate-x-1/2">
           {children}
         </div>
-      </div>
+      </main>
 
       <Footer>
         Created by <Href href="https://j4wad.com">Jawad Shuaib</Href>. View{' '}
