@@ -21,8 +21,7 @@ async function fetchData(action, method = 'GET', body = null) {
 
     return await response.json();
   } catch (error) {
-    console.error('Error occurred while fetching data:', error);
-    throw error;
+    return error;
   }
 }
 

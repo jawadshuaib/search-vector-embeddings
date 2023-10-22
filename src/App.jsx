@@ -6,6 +6,7 @@ import './App.css';
 import AppLayout from './ui/AppLayout';
 import Search from './features/search/Search';
 import PageNotFound from './features/pages/PageNotFound';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,14 @@ function App() {
             </Routes>
           </QueryClientProvider>
         </AppLayout>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: '8px' }}
+          toastOptions={{
+            error: { duration: 5000 },
+          }}
+        />
       </Provider>
     </Router>
   );

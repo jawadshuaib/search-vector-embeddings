@@ -8,6 +8,7 @@ export default function Input({
   placeholder,
   customClass,
   onChange,
+  isLoading,
 }) {
   const [inputValue, setInputValue] = useState(value);
 
@@ -28,7 +29,7 @@ export default function Input({
         placeholder={`${placeholder}`}
         onChange={(e) => handleChange(e)}
       />
-      <InputIcon />
+      <InputIcon isLoading={isLoading} />
     </div>
   );
 }
@@ -38,6 +39,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   customClass: PropTypes.string,
   value: PropTypes.string,
+  isLoading: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -45,4 +47,5 @@ Input.defaultProps = {
   placeholder: '',
   customClass: '',
   value: '',
+  isLoading: false,
 };
