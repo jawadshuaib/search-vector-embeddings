@@ -57,15 +57,17 @@ export default function Explanation({ method, query, results }) {
             database. The angle between them provides a similarity score which
             can then be used to sort results semantically.
           </p>
-          <p>
-            In this case, &quot;
-            <span className="font-medium">{name.split('|')[0].trim()}</span>
-            &quot; is{' '}
-            <span className="font-medium">
-              {Math.round(similarity * 100)}%
-            </span>{' '}
-            semantically similar to the query.
-          </p>
+          {similarity < 1 && (
+            <p>
+              In this case, &quot;
+              <span className="font-medium">{name.split('|')[0].trim()}</span>
+              &quot; is{' '}
+              <span className="font-medium">
+                {Math.round(similarity * 100)}%
+              </span>{' '}
+              semantically similar to the query.
+            </p>
+          )}
         </>
       )}
 

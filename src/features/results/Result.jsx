@@ -12,7 +12,7 @@ export default function Result({ children, customClass, allowClick }) {
 
   return (
     <div
-      className={`${customClass} py-2 px-3 text-black rounded-md `}
+      className={`${customClass} py-2 px-3 text-black hover:rounded-md`}
       onClick={handleClick}
     >
       {children}

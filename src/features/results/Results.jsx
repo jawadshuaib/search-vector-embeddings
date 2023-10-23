@@ -14,7 +14,7 @@ export default function Results() {
           {results.map((result) => (
             <Result
               key={result.id}
-              customClass="cursor-pointer hover:bg-slate-100 dark:hover:text-black"
+              customClass="cursor-pointer hover:bg-slate-100 dark:hover:text-black border-dotted border-b-2 border-slate-300"
             >
               {result.name.split('|')[0]}
             </Result>
