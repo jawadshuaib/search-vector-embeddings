@@ -8,7 +8,7 @@ export default function AppLayout({ children }) {
   return (
     <div className="App flex flex-col min-h-screen justify-center dark:bg-slate-800">
       <main className="flex-grow">
-        <div className="absolute max-w-lg top-8 w-96 sm:w-128 md:top-[10%] md:p-0 left-1/2 transform -translate-x-1/2">
+        <div className="absolute p-3 max-w-lg top-8 w-96 sm:w-128 md:top-[10%] md:p-0 left-1/2 transform -translate-x-1/2">
           {children}
         </div>
       </main>
