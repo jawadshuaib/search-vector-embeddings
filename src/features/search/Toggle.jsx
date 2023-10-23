@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Paragraph from '../../ui/Paragraph';
 import Radio from '../../ui/Radio';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMethod } from './searchSlice';
 import { defaults } from '../../utils/settings';
 
 export default function Toggle({ name }) {
   const methods = defaults.methods;
+  const { method: updatedMethod } = useSelector((state) => state.search);
   const [selection, setSelection] = useState(methods.at(0));
   const dispatch = useDispatch();
+
+  // Update selection when method changes
+  // This can be triggered when user clicks on a button
+  // from another component
+  useEffect(() => {
+    if (updatedMethod === selection) return;
+    setSelection(updatedMethod);
+  }, [updatedMethod]);
 
   const handleSelection = (method) => {
     setSelection(method);

@@ -29,7 +29,7 @@ export default function Search() {
   } = useQuery({
     queryKey: ['search'],
     queryFn: () =>
-      method === 'vectors'
+      method === 'Vectors'
         ? findProducts('Vectors', { embedding })
         : findProducts('SQL', { query }),
     refetchOnWindowFocus: false,
