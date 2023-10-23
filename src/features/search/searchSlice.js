@@ -6,7 +6,7 @@ const initialState = {
   embedding: [],
   results: [],
   method: 'Vectors',
-  isLoading: false,
+  isLoading: true,
 };
 const searchReducer = createSlice({
   name: 'search',
