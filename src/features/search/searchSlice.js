@@ -6,6 +6,7 @@ const initialState = {
   embedding: [],
   results: [],
   method: 'vectors',
+  isLoading: false,
 };
 const searchReducer = createSlice({
   name: 'search',
@@ -25,8 +26,11 @@ const searchReducer = createSlice({
     setMethod(state, action) {
       state.method = action.payload;
     },
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
 });
 export default searchReducer.reducer;
-export const { setSearch, setSampleQuery, setResults, setMethod } =
+export const { setSearch, setSampleQuery, setResults, setMethod, setLoading } =
   searchReducer.actions;

@@ -58,7 +58,7 @@ async function advanceSqlQuery(tableName, query) {
 
   const data = uniqueResults.slice(0, 5); // Limit the results to 5
 
-  return { data, error: null };
+  return { data, error: 'Error with advance sql search' };
 }
 
 // We will try two methods to find products:

@@ -25,8 +25,8 @@ export default function Radio({ children, name, value, checked, onChange }) {
       />
       <div
         className={`${
-          checked && `dark:text-black`
-        } w-full py-4 ml-2 text-sm font-medium text-black dark:text-gray-300`}
+          checked ? `dark:text-black` : `dark:text-gray-300`
+        } w-full py-4 ml-2 text-sm font-medium text-black `}
       >
         {children}
       </div>

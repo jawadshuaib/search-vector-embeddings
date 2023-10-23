@@ -3,15 +3,21 @@ import getVector from '../../services/getVector';
 import { findProducts } from '../../services/searchProducts';
 import Input from '../../ui/Input';
 import { useDispatch, useSelector } from 'react-redux';
-import { setResults, setSampleQuery, setSearch } from './searchSlice';
+import {
+  setResults,
+  setSampleQuery,
+  setSearch,
+  setLoading,
+} from './searchSlice';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 export default function Search() {
   const [embedding, setEmbedding] = useState([]);
   const [timer, setTimer] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { query, sampleQuery, method } = useSelector((state) => state.search);
+  const { query, sampleQuery, method, isLoading } = useSelector(
+    (state) => state.search,
+  );
   const dispatch = useDispatch();
 
   // React Query
@@ -37,7 +43,7 @@ export default function Search() {
     //
     // Store results in redux slice
     if (results) dispatch(setResults(results));
-    if (results) setIsLoading(false);
+    if (results && !isRefetching) dispatch(setLoading(false));
   }, [results, isRefetching]);
 
   useEffect(() => {
@@ -46,8 +52,8 @@ export default function Search() {
     // there is a change in state
     //
     if (embedding.length > 0) refetch();
-    if (embedding.length > 0) setIsLoading(true);
-  }, [embedding, method]);
+    if (embedding.length > 0) dispatch(setLoading(true));
+  }, [embedding, method, setLoading]);
 
   useEffect(() => {
     //
