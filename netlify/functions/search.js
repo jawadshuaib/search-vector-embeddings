@@ -20,13 +20,64 @@ async function findProductsUsingVectors(embedding) {
   return { data, error };
 }
 
-async function findProductsUsingSql(query) {
+async function simpleSqlQuery(tableName, query) {
   const { data, error } = await supabase
-    .from('products')
+    .from(tableName)
     .select()
     .ilike('name', `%${query}%`)
     .limit(5);
+
   return { data, error };
+}
+
+async function advanceSqlQuery(tableName, query) {
+  const words = query.split(/\s+/).filter(Boolean); // Split the query into words
+
+  const searchPromises = words.map(async (word) => {
+    const { data, error } = await supabase
+      .from('products')
+      .select()
+      .ilike('name', `%${word}%`)
+      .order('name'); // You can customize the order here
+
+    if (error) {
+      console.error('Error querying the database:', error);
+      return [];
+    }
+
+    return data;
+  });
+
+  const searchResults = await Promise.all(searchPromises);
+  const mergedResults = [].concat(...searchResults);
+
+  // Filter out duplicate results using a Set
+  const uniqueResults = Array.from(
+    new Set(mergedResults.map(JSON.stringify)),
+  ).map(JSON.parse);
+
+  const data = uniqueResults.slice(0, 5); // Limit the results to 5
+
+  return { data, error: null };
+}
+
+// We will try two methods to find products:
+// The first is using a simple SQL match
+// If that doesn't work, then we query each word in the string separately
+async function findProductsUsingSql(query) {
+  const { data: sData, error: sError } = await simpleSqlQuery(
+    'products',
+    query,
+  );
+  if (sData.length === 0) {
+    const { data: aData, error: aError } = await advanceSqlQuery(
+      'products',
+      query,
+    );
+    return { data: aData, error: aError };
+  } else {
+    return { data: sData, error: sError };
+  }
 }
 
 export async function handler(event) {
