@@ -4,7 +4,7 @@ import Paragraph from '../../ui/Paragraph';
 import Radio from '../../ui/Radio';
 
 export default function Toggle({ name }) {
-  const options = ['vector', 'sql'];
+  const options = ['vectors', 'sql'];
   const [selection, setSelection] = useState(options.at(0));
 
   const handleSelection = (val) => {
@@ -24,7 +24,7 @@ export default function Toggle({ name }) {
             checked={selection === option ? true : false}
             onChange={handleSelection}
           >
-            Use {option} query
+            Search using {option}
           </Radio>
         ))}
       </div>
