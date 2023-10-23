@@ -14,9 +14,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 async function findProductsUsingVectors(embedding) {
   const { data, error } = await supabase.rpc('match_products', {
     query_embedding: embedding,
-    match_threshold: 0.7,
+    match_threshold: 0.8,
     match_count: 5,
   });
+  return { data, error };
+}
+
+async function findProductsUsingSql(query) {
+  const { data, error } = await supabase
+    .from('products')
+    .select()
+    .ilike('name', `%${query}%`)
+    .limit(5);
   return { data, error };
 }
 
@@ -28,9 +37,14 @@ export async function handler(event) {
     let result;
     let body;
     switch (action) {
-      case 'vectorSearch':
+      case 'vectors':
         body = JSON.parse(event.body); // Parse the request body to get the embedding data
         result = await findProductsUsingVectors(body.embedding);
+        if (result.error) throw result.error;
+        break;
+      case 'sql':
+        body = JSON.parse(event.body); // Parse the request body to get the embedding data
+        result = await findProductsUsingSql(body.query);
         if (result.error) throw result.error;
         break;
       default:

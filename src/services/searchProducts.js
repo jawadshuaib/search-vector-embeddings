@@ -25,7 +25,6 @@ async function fetchData(action, method = 'GET', body = null) {
   }
 }
 
-export async function findProductsUsingVectors(embedding) {
-  const action = 'vectorSearch';
-  return await fetchData(action, 'POST', { embedding });
+export async function findProducts(action, payload) {
+  return await fetchData(action, 'POST', payload);
 }

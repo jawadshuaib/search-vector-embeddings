@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Paragraph from '../../ui/Paragraph';
 import Radio from '../../ui/Radio';
+import { useDispatch } from 'react-redux';
+import { setMethod } from './searchSlice';
 
 export default function Toggle({ name }) {
-  const options = ['vectors', 'sql'];
-  const [selection, setSelection] = useState(options.at(0));
+  const methods = ['vectors', 'sql'];
+  const [selection, setSelection] = useState(methods.at(0));
+  const dispatch = useDispatch();
 
-  const handleSelection = (val) => {
-    setSelection(val);
+  const handleSelection = (method) => {
+    setSelection(method);
+    dispatch(setMethod(method));
   };
 
   return (
@@ -16,15 +20,15 @@ export default function Toggle({ name }) {
       <Paragraph>Toggle to compare results.</Paragraph>
 
       <div className="grid gap-1 md:grid-cols-2 mb-3">
-        {options.map((option) => (
+        {methods.map((method) => (
           <Radio
-            key={option}
+            key={method}
             name={name}
-            value={option}
-            checked={selection === option ? true : false}
+            value={method}
+            checked={selection === method ? true : false}
             onChange={handleSelection}
           >
-            Search using {option}
+            Search using {method}
           </Radio>
         ))}
       </div>

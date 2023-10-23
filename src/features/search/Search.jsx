@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Search() {
   const sampleQuery = 'Connector for TV';
-  const { results } = useSelector((state) => state.search);
+  const { results, query } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -27,7 +27,7 @@ export default function Search() {
       </Paragraph>
       <Form />
       <Results />
-      {results.length === 0 && (
+      {results.length === 0 && query === null && (
         <Paragraph customClass="mt-5">
           Experiment searching an electronics store. For example, search for{' '}
           <span

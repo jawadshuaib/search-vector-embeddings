@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getVector from '../../services/getVector';
-import { findProductsUsingVectors } from '../../services/searchProducts';
+import { findProducts } from '../../services/searchProducts';
 import Input from '../../ui/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResults, setSampleQuery, setSearch } from './searchSlice';
@@ -11,9 +11,10 @@ export default function Search() {
   const [embedding, setEmbedding] = useState([]);
   const [timer, setTimer] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { sampleQuery } = useSelector((state) => state.search);
+  const { query, sampleQuery, method } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
+  console.log(method);
   // React Query
   const {
     data: results,
@@ -22,7 +23,10 @@ export default function Search() {
     isLoading: isQueryLoading,
   } = useQuery({
     queryKey: ['search'],
-    queryFn: () => findProductsUsingVectors(embedding),
+    queryFn: () =>
+      method === 'vectors'
+        ? findProducts('vectors', { embedding })
+        : findProducts('sql', { query }),
     refetchOnWindowFocus: false,
     enabled: false, //disable the query:
     //this is how we keep it from running on component mount.
@@ -52,6 +56,7 @@ export default function Search() {
     //
     if (sampleQuery === null) return;
 
+    // Debounce delay not necessary for sampleQuery
     handleChange(sampleQuery, 0);
   }, [sampleQuery]);
 
@@ -64,7 +69,7 @@ export default function Search() {
 
     if (query.length < 3) {
       dispatch(setResults([]));
-      dispatch(setSearch({ query, embedding: [] }));
+      dispatch(setSearch({ query: null, embedding: [] }));
       return;
     }
 
