@@ -14,7 +14,6 @@ export default function Search() {
   const { query, sampleQuery, method } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
-  console.log(method);
   // React Query
   const {
     data: results,
@@ -48,7 +47,7 @@ export default function Search() {
     //
     if (embedding.length > 0) refetch();
     if (embedding.length > 0) setIsLoading(true);
-  }, [embedding]);
+  }, [embedding, method]);
 
   useEffect(() => {
     //

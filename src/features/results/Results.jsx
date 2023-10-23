@@ -1,14 +1,9 @@
 import React from 'react';
 import Result from './Result';
 import { useSelector } from 'react-redux';
-// import { useQuery } from '@tanstack/react-query';
 
 export default function Results() {
   const { results, query } = useSelector((state) => state.search);
-
-  // const { isLoading } = useQuery({
-  //   queryKey: ['search'],
-  // });
 
   return (
     <div>
