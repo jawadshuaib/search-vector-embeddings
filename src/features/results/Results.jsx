@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import Explanation from './Explanation';
 
 export default function Results() {
-  const { results, query, method } = useSelector((state) => state.search);
+  const { results, query, method, isLoading } = useSelector(
+    (state) => state.search,
+  );
 
   return (
     <div>
@@ -26,7 +28,7 @@ export default function Results() {
           </Result>
         </div>
       )}
-      {query !== null && results.length === 0 && (
+      {query !== null && results.length === 0 && isLoading === false && (
         <div className="absolute mt-2 w-full overflow-hidden rounded-md bg-white dark:bg-slate-200">
           <Result allowClick={false}>No results found</Result>
         </div>
