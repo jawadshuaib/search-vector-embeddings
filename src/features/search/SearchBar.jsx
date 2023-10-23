@@ -30,8 +30,8 @@ export default function Search() {
     queryKey: ['search'],
     queryFn: () =>
       method === 'vectors'
-        ? findProducts('vectors', { embedding })
-        : findProducts('sql', { query }),
+        ? findProducts('Vectors', { embedding })
+        : findProducts('SQL', { query }),
     refetchOnWindowFocus: false,
     enabled: false, //disable the query:
     //this is how we keep it from running on component mount.

@@ -27,7 +27,7 @@ async function fetchData(action, method = 'GET', body = null) {
 
 // @Params: action: string, payload: object
 // @Returns: object
-// Example: findProducts('vectors', { embedding });
+// Example: findProducts('Vectors', { embedding });
 export async function findProducts(action, payload) {
   return await fetchData(action, 'POST', payload);
 }

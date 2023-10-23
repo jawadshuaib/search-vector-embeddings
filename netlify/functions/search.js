@@ -58,7 +58,7 @@ async function advanceSqlQuery(tableName, query) {
 
   const data = uniqueResults.slice(0, 5); // Limit the results to 5
 
-  return { data, error: 'Error with advance sql search' };
+  return { data, error: null };
 }
 
 // We will try two methods to find products:
@@ -88,12 +88,12 @@ export async function handler(event) {
     let result;
     let body;
     switch (action) {
-      case 'vectors':
+      case 'Vectors':
         body = JSON.parse(event.body); // Parse the request body to get the embedding data
         result = await findProductsUsingVectors(body.embedding);
         if (result.error) throw result.error;
         break;
-      case 'sql':
+      case 'SQL':
         body = JSON.parse(event.body); // Parse the request body to get the embedding data
         result = await findProductsUsingSql(body.query);
         if (result.error) throw result.error;

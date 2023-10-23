@@ -4,9 +4,10 @@ import Paragraph from '../../ui/Paragraph';
 import Radio from '../../ui/Radio';
 import { useDispatch } from 'react-redux';
 import { setMethod } from './searchSlice';
+import { defaults } from '../../utils/settings';
 
 export default function Toggle({ name }) {
-  const methods = ['vectors', 'sql'];
+  const methods = defaults.methods;
   const [selection, setSelection] = useState(methods.at(0));
   const dispatch = useDispatch();
 

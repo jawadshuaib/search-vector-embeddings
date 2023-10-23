@@ -20,10 +20,7 @@ export default function Search() {
       <H1 customClass="mb-5">Search Vector</H1>
       <Paragraph customClass="hidden sm:flex">
         This project demonstrates that vectorized search yields qualitatively
-        better results than traditional SQL queries. SQL uses exact string
-        comparisons while vector based search uses dimensional similarity
-        between strings. The later method offers greater flexibility as it
-        performs well even in absence of exact word matches.
+        better results than traditional SQL queries.
       </Paragraph>
       <Form />
       <Results />

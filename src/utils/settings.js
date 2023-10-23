@@ -4,3 +4,7 @@ export const siteInfo = {
   creatorUrl: 'https://j4wad.com',
   githubUrl: 'https://github.com/jawadshuaib/search-vector-embeddings',
 };
+
+export const defaults = {
+  methods: ['Vectors', 'SQL'],
+};
