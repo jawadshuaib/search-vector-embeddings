@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import Footer from './Footer';
 import Href from './Href';
 import { siteInfo } from '../utils/settings';
+import { useSelector } from 'react-redux';
 
 export default function AppLayout({ children }) {
+  const { results } = useSelector((state) => state.search);
+
   return (
     <div className="flex flex-col min-h-screen justify-center dark:bg-slate-800">
       <main className="flex-grow">
@@ -12,10 +15,14 @@ export default function AppLayout({ children }) {
           {children}
         </div>
       </main>
-      <Footer>
-        Created by <Href href={siteInfo.creatorUrl}>Jawad Shuaib</Href>. View{' '}
-        <Href href={siteInfo.githubUrl}>Github repo</Href>.
-      </Footer>
+      {/* Display footer only when there are no results. */}
+      {/* This is a workaround for search results overflowing the footer. */}
+      {results.length === 0 && (
+        <Footer>
+          Created by <Href href={siteInfo.creatorUrl}>Jawad Shuaib</Href>. View{' '}
+          <Href href={siteInfo.githubUrl}>Github repo</Href>.
+        </Footer>
+      )}
     </div>
   );
 }
