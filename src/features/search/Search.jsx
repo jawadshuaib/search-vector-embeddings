@@ -26,15 +26,20 @@ export default function Search() {
       <Form />
       <Results />
       {results.length === 0 && query === null && (
-        <Paragraph customClass="mt-5">
-          Experiment searching an electronics store. For example, search for{' '}
-          <span
-            onClick={handleClick}
-            className="cursor-pointer bg-yellow-300 rounded p-0.5 text-slate-500 hover:text-slate-600 hover:bg-yellow-400"
-          >
-            {sampleQuery}
-          </span>
-        </Paragraph>
+        <>
+          <Paragraph customClass="mt-3" fontSize="text-md" margin="mb-2">
+            Experiment searching an electronics store.
+          </Paragraph>
+          <Paragraph fontSize="text-md" margin="mb-0">
+            Example Search:{' '}
+            <span
+              onClick={handleClick}
+              className="cursor-pointer bg-yellow-300 rounded p-0.5 text-slate-500 hover:text-slate-600 hover:bg-yellow-400"
+            >
+              {sampleQuery}
+            </span>
+          </Paragraph>
+        </>
       )}
     </>
   );
