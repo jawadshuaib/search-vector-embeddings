@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Paragraph from '../../ui/Paragraph';
 import Radio from '../../ui/Radio';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMethod } from './searchSlice';
@@ -26,23 +25,19 @@ export default function Toggle({ name }) {
   };
 
   return (
-    <>
-      <Paragraph>Toggle to compare results.</Paragraph>
-
-      <div className="grid gap-1 md:grid-cols-2 mb-3">
-        {methods.map((method) => (
-          <Radio
-            key={method}
-            name={name}
-            value={method}
-            checked={selection === method ? true : false}
-            onChange={handleSelection}
-          >
-            Search using {method}
-          </Radio>
-        ))}
-      </div>
-    </>
+    <div className="grid gap-1 md:grid-cols-2 mb-3">
+      {methods.map((method) => (
+        <Radio
+          key={method}
+          name={name}
+          value={method}
+          checked={selection === method ? true : false}
+          onChange={handleSelection}
+        >
+          Search using {method}
+        </Radio>
+      ))}
+    </div>
   );
 }
 
