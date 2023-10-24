@@ -21,7 +21,7 @@ export default function Search() {
       <H1 customClass="mb-5">Search Vector</H1>
       <Paragraph customClass="sm:flex" fontSize="text-xl md:text-lg">
         This project demonstrates that vectorized search yields qualitatively
-        better results than SQL.
+        better results than traditional SQL.
       </Paragraph>
       <Form />
       <Results />
