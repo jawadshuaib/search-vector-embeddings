@@ -5,12 +5,12 @@ import { setMethod } from '../search/searchSlice';
 import { defaults } from '../../utils/settings';
 import Image from '../../ui/Image';
 
-export default function Explanation({ method, query, results }) {
+export default function Explanation({ method, query }) {
   const dispatch = useDispatch();
   const methods = defaults.methods;
   const selectedIndex = methods.indexOf(method);
   const alternativeMethod = methods.at(selectedIndex === 0 ? 1 : 0);
-  const { name, similarity } = results.at(0);
+  // const { name, similarity } = results.at(0);
 
   function handleClick() {
     // Change method type
@@ -57,7 +57,7 @@ export default function Explanation({ method, query, results }) {
             database. The angle between them provides a similarity score which
             can then be used to sort results semantically.
           </p>
-          {similarity < 1 && (
+          {/* {similarity < 1 && (
             <p>
               In this case, &quot;
               <span className="font-medium">{name.split('|')[0].trim()}</span>
@@ -67,7 +67,7 @@ export default function Explanation({ method, query, results }) {
               </span>{' '}
               semantically similar to the query.
             </p>
-          )}
+          )} */}
         </>
       )}
 
@@ -87,13 +87,13 @@ export default function Explanation({ method, query, results }) {
 Explanation.propTypes = {
   method: PropType.string.isRequired,
   query: PropType.string.isRequired,
-  results: PropType.arrayOf(
-    PropType.shape({
-      // Define the shape of each object in the array
-      name: PropType.string.isRequired,
-      id: PropType.number.isRequired,
-      similarity: PropType.number,
-      // Add more properties and their corresponding PropTypes as needed
-    }),
-  ).isRequired,
+  // results: PropType.arrayOf(
+  //   PropType.shape({
+  //     // Define the shape of each object in the array
+  //     name: PropType.string.isRequired,
+  //     id: PropType.number.isRequired,
+  //     similarity: PropType.number,
+  //     // Add more properties and their corresponding PropTypes as needed
+  //   }),
+  // ).isRequired,
 };

@@ -24,7 +24,7 @@ export default function Results() {
 
           <h2 className="text-lg font-medium">Explanation</h2>
           <Result allowClick={false}>
-            <Explanation method={method} query={query} results={results} />
+            <Explanation method={method} query={query} />
           </Result>
         </div>
       )}

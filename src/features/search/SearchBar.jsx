@@ -35,7 +35,7 @@ export default function Search() {
     const newTimer = setTimeout(() => {
       (async () => {
         try {
-          const resp = await getVector(query);
+          const resp = await getVector(query.trim());
 
           // Store query and embeddings in redux slice
           dispatch(setSearch({ query, embedding: resp.embedding }));

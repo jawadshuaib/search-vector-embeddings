@@ -14,7 +14,7 @@ export async function handler(event) {
         Authorization: `Bearer ${token}`,
       },
       method: 'POST',
-      body: JSON.stringify({ input, model }),
+      body: JSON.stringify({ input: input, model }),
     });
 
     const { data, error } = await response.json();

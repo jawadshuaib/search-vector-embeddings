@@ -14,11 +14,12 @@ const searchReducer = createSlice({
   reducers: {
     setSearch(state, action) {
       const { query, embedding } = action.payload;
-      state.query = query;
+      state.query = query === null ? null : query.trim();
       state.embedding = embedding;
     },
     setSampleQuery(state, action) {
-      state.sampleQuery = action.payload;
+      state.sampleQuery =
+        action.payload === null ? null : action.payload.trim();
     },
     setResults(state, action) {
       state.results = action.payload;
