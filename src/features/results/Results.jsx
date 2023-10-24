@@ -11,7 +11,7 @@ export default function Results() {
   return (
     <div>
       {results.length > 0 && query !== null && !isLoading && (
-        <div className="max-h-[calc(100vh-500px)] overflow-hidden overflow-y-auto absolute mt-2 border-dashed border-2 p-2 rounded-md bg-white dark:bg-slate-200">
+        <div className="overflow-hidden absolute mt-2 mr-3 md:mr-0 border-dashed border-2 p-2 rounded-md bg-white dark:bg-slate-200">
           <h2 className="text-lg font-medium">Search Results using {method}</h2>
           {results.map((result) => (
             <Result
