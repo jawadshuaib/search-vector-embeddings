@@ -7,4 +7,5 @@ export const siteInfo = {
 
 export const defaults = {
   methods: ['Vectors', 'SQL'],
+  sampleQuery: 'Connector for TV',
 };

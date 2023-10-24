@@ -5,9 +5,10 @@ import H1 from '../../ui/H1';
 import Paragraph from '../../ui/Paragraph';
 import { setSampleQuery } from './searchSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { defaults } from '../../utils/settings';
 
 export default function Search() {
-  const sampleQuery = 'Connector for TV';
+  const sampleQuery = defaults.sampleQuery;
   const { results, query } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 

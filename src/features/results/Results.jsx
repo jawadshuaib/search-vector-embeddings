@@ -10,7 +10,7 @@ export default function Results() {
 
   return (
     <div>
-      {results.length > 0 && !isLoading && (
+      {results.length > 0 && query !== null && !isLoading && (
         <div className="absolute mt-2 border-dashed border-2 p-2 overflow-hidden rounded-md bg-white dark:bg-slate-200">
           <h2 className="text-lg font-medium">Search Results using {method}</h2>
           {results.map((result) => (

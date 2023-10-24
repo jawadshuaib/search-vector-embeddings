@@ -12,13 +12,19 @@ export default function Input({
 }) {
   const [inputValue, setInputValue] = useState(value);
 
+  // This input value is provided by the props
   useEffect(() => {
     setInputValue(value);
   }, [value]);
 
+  // Update the parent component when input value changes
+  // This happens when the user types in the text field
+  useEffect(() => {
+    onChange(inputValue);
+  }, [inputValue]);
+
   function handleChange(e) {
     setInputValue(e.target.value);
-    onChange(e.target.value);
   }
   return (
     <div className="flex justify-between overflow-hidden rounded-md bg-white shadow shadow-black/20 dark:bg-gray-600">
