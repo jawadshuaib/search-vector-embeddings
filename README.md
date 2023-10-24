@@ -10,49 +10,53 @@ SQL uses exact string comparisons while vector based search uses dimensional sim
 
 View live app: https://search-vector-embeddings.netlify.app/
 
-Having said that, it is also possible to use a similar methodology using SQL as well - called Levenshtein Distance. However, it is not commonly used due to performance (comp sci would classify it as O(m \* n) in terms of time and space complexity), scalability and indexing issues. Searching embeddings on a database that supports vectors offers a much better solution.
+Having said that, it is also possible to use a similar methodology using SQL as well - called Levenshtein Distance. However, it is not commonly used due to performance, scalability and indexing issues. In terms of the time and space complexity, it would be classified as O(m \* n). Searching embeds on a database that supports vectors is not only more scalable, but also easily indexable.
 
 ![Search comparison](https://search-vector-embeddings.netlify.app/sql-search.png)
 
 ## Try it out
 
-Supabase provides support for storing vectors. I calculated vectors for each product using OpenAI's gpt-3.5, and uploaded them to Supabase. The "vector" extension should be enabled on Supabase to create a column with embeddings.
+Supabase provides support for storing vectors. I calculated vectors for each product using OpenAI's text-embedding-ada-002 algorithm, and uploaded them to Supabase. The "vector" extension should be enabled on Supabase to create a column with embeddings.
 
 After that, a serverless function needs to be created on Supabase to act as a proxy between the database and your code. I used the following configuration:
 
-> create or replace function match_products (
-> query_embedding vector(1536),
-> match_threshold float,
-> match_count int
-> )
-> returns table (
-> id bigint,
-> name varchar,
-> similarity float
-> )
-> language sql stable
-> as $$
-> select
-> tableProducts.id,
-> tableProducts.name,
-> 1 - (tableProducts.nameEmbedding <=> query_embedding) as similarity
-> from tableProducts
-> where 1 - (tableProducts.nameEmbedding <=> query_embedding) > match_threshold
-> order by similarity desc
-> limit match_count;
-> $$
+```sql
+create or replace function match_products (
+query_embedding vector(1536),
+match_threshold float,
+match_count int
+)
+returns table (
+id bigint,
+name varchar,
+similarity float
+)
+language sql stable
+as $$
+select
+tableProducts.id,
+tableProducts.name,
+1 - (tableProducts.nameEmbedding <=> query_embedding) as similarity
+from tableProducts
+where 1 - (tableProducts.nameEmbedding <=> query_embedding) > match_threshold
+order by similarity desc
+limit match_count;
+$$
+```
 
 ### Install the dependencies
 
     $ npm install
 
-### Run & Start Testing
+### Environment Variables
 
 Make sure netlify cli is installed. We will need it to run netlify headless functions. Environment variables are fetched directly from the server for security purposes.
 
 Environment variables that need to be setup:
-OPENAI_API_KEY
-SUPABASE_URL
-SUPABASE_KEY
+$ OPENAI_API_KEY
+$ SUPABASE_URL
+$ SUPABASE_KEY
+
+### Run & Start Testing
 
     $ netlify dev
