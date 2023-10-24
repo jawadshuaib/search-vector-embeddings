@@ -59,7 +59,7 @@ export default function Search() {
     <Input
       type="text"
       value={sampleQuery || ''}
-      placeholder="Start Typing..."
+      placeholder="Search an Electronics Store..."
       onChange={handleChange}
       isLoading={isLoading || isQueryLoading}
     />
