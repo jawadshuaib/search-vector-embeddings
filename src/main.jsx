@@ -14,7 +14,7 @@ function setDarkModeBasedOnTime() {
   const currentHour = new Date().getHours();
 
   // Assuming dark mode should be active between 8 PM and 6 AM
-  const isNightTime = currentHour < 6 || currentHour >= 20;
+  const isNightTime = currentHour < 6 || currentHour >= 18;
 
   // Apply the 'dark' class to the 'body' tag if it's night time
   if (isNightTime) {
